@@ -1,1 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
+@use "./assets/styles/variables" as vars;
+
+.nav-pills .nav-link.active {
+  background: vars.$primary;
+}
