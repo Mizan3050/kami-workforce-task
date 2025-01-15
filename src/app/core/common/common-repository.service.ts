@@ -14,4 +14,7 @@ export class CommonRepositoryService {
   getPhotos(params: ListParams) {
     return this.#commonApiService.getPhotos(params)
   }
+  getPosts(params: ListParams) {
+    return this.#commonApiService.getPosts(params)
+  }
 }

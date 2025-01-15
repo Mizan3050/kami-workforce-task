@@ -98,3 +98,17 @@
 .lh-tight {
   line-height: 1.25;
 }
+
+.dropdown {
+  padding: 10px;
+  border: 1px solid #bababa;
+  border-radius: 3px;
+
+  .user-profile {
+    display: flex;
+    flex-direction: column;
+    a {
+      font-size: 0.7rem;
+    }
+  }
+}

@@ -1,7 +1,19 @@
 $primary: #cdaafb !default; // Example custom primary color
 $secondary: #33c4ff !default; // Example custom secondary color
 
-p {
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+a,
+strong {
   margin: 0;
   padding: 0;
+}
+
+.clickable {
+  cursor: pointer;
 }

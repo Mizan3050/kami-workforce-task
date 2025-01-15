@@ -19,6 +19,9 @@
       gap: 15px;
       margin-top: 20px;
       .album-card {
+        img {
+          border-radius: 2px;
+        }
         .album-title {
           font-size: small;
           white-space: nowrap;
@@ -30,6 +33,8 @@
     }
   }
   .top-posts {
-    height: 70vh;
+    max-height: 93vh;
+    padding: 15px;
+    overflow: auto;
   }
 }
