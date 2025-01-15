@@ -1,0 +1,35 @@
+.dashboard {
+  background: #e7e7e7;
+  padding: 10px;
+
+  .white-pane {
+    background: white;
+    border-radius: 2px;
+  }
+
+  .analytics {
+    height: 20vh;
+  }
+  .photos {
+    margin-top: 20px;
+    height: 70vh;
+    padding: 15px;
+    overflow: auto;
+    .photo-list {
+      gap: 15px;
+      margin-top: 20px;
+      .album-card {
+        .album-title {
+          font-size: small;
+          white-space: nowrap;
+          width: 120px;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+      }
+    }
+  }
+  .top-posts {
+    height: 70vh;
+  }
+}

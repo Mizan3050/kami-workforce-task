@@ -1,1 +1,30 @@
-<dashboard-sidebar></dashboard-sidebar>
+<div class="d-flex">
+  <dashboard-sidebar></dashboard-sidebar>
+  <div class="dashboard container">
+    <div class="row">
+      <div class="col-6">
+        <div class="analytics white-pane"></div>
+        <div class="photos white-pane">
+          <p>Recent Photos: ({{ photosCount }})</p>
+          <ng-container *ngIf="photos$ | async as photos">
+            <div class="photo-list d-flex flex-wrap justify-content-between">
+              <div class="album-card" *ngFor="let photo of photos">
+                <img
+                  [src]="photo.thumbnailUrl"
+                  alt=""
+                  srcset=""
+                  width="120"
+                  height="150"
+                />
+                <p class="album-title">{{ photo.title }}</p>
+              </div>
+            </div>
+          </ng-container>
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="top-posts white-pane"></div>
+      </div>
+    </div>
+  </div>
+</div>
