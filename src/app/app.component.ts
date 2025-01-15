@@ -9,4 +9,8 @@ import { RouterOutlet } from '@angular/router';
 })
 export class AppComponent {
   title = 'kami-workforce-task';
+
+  constructor(){
+    console.log("Kami Work Force App")
+  }
 }
