@@ -1,38 +1,53 @@
 <div class="d-flex">
   <dashboard-sidebar></dashboard-sidebar>
-  <div class="dashboard container">
+  <div class="dashboard">
     <div class="row">
-      <div class="col-6">
-        <div class="analytics white-pane"></div>
+      <!-- Left Column -->
+      <div class="col-lg-6 col-md-12">
+        <div class="analytics white-pane mb-4 d-flex align-items-center">
+          <div class="container">
+            <div class="row text-center">
+              <!-- Posts -->
+              <div class="col-md-4" *ngFor="let widget of summary_widgets">
+                <div class="info-box">
+                  <i [class]="widget.class"></i>
+                  <div>
+                    <small class="text-muted">{{ widget.title }}</small> <br />
+                    <span>{{ widget.count() }}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
         <div class="photos white-pane">
-          <div class="d-flex">
-            Recent Photos:
-            <p class="text-secondary">({{ photosCount }})</p>
+          <div class="d-flex align-items-center justify-content-start mb-3">
+            <span>Recent Photos:</span>
+            <p class="text-secondary m-0">({{ photosCount() }})</p>
           </div>
           <ng-container *ngIf="photos$ | async as photos">
             <div
               class="photo-list d-flex flex-wrap justify-content-between clickable"
             >
-              <div class="album-card" *ngFor="let photo of photos">
+              <div class="album-card mb-3" *ngFor="let photo of photos">
                 <img
-                  *ngIf="false"
+                *ngIf="false"
                   [src]="photo.thumbnailUrl"
-                  alt=""
-                  srcset=""
-                  width="120"
-                  height="120"
+                  alt="Photo Thumbnail"
+                  class="img-fluid"
                 />
-                <p class="album-title">{{ photo.title }}</p>
+                <p class="album-title text-truncate">{{ photo.title }}</p>
               </div>
             </div>
           </ng-container>
         </div>
       </div>
-      <div class="col-6">
+      <!-- Right Column -->
+      <div class="col-lg-6 col-md-12">
         <div class="top-posts white-pane">
-          <div class="d-flex mb-4">
-            Top Posts:
-            <p class="text-secondary">({{ postsCount }})</p>
+          <div class="d-flex align-items-center justify-content-start mb-4">
+            <span>Top Posts:</span>
+            <p class="text-secondary m-0">({{ postsCount() }})</p>
           </div>
           <ng-container *ngIf="posts$ | async as posts">
             <div class="flex-column mt-3" *ngFor="let post of posts">

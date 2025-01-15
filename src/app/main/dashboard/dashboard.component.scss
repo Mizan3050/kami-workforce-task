@@ -38,3 +38,18 @@
     overflow: auto;
   }
 }
+
+.info-box {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-align: center;
+}
+.info-box i {
+  font-size: 35px;
+  color: #f05050;
+}
+.info-box span {
+  font-weight: bold;
+  font-size: 20px;
+}

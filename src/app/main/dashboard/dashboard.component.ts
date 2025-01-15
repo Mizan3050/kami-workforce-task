@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, WritableSignal, inject, signal } from '@angular/core';
 import { DashboardSidebarComponent } from './components/dashboard-sidebar/dashboard-sidebar.component';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { environment } from '../../../environment/environment';
@@ -17,12 +17,30 @@ import { Photo } from '../photos/interface/photos.interface';
 export class DashboardComponent implements OnInit {
 
   photos$!: Observable<Photo[]>;
-  photosCount: number = 0;
+  photosCount: WritableSignal<number> = signal(0);
 
   posts$!: Observable<any[]>;
-  postsCount: number = 0;
+  postsCount: WritableSignal<number> = signal(0);
 
   commonRepositoryService = inject(CommonRepositoryService);
+
+  summary_widgets = [
+    {
+      title: 'POSTS',
+      count: this.postsCount,
+      class: 'fas fa-comment-alt text-primary'
+    },
+    {
+      title: 'ALBUMS',
+      count: this.photosCount,
+      class: 'fas fa-images text-success'
+    },
+    {
+      title: 'PHOTOS',
+      count: signal(12),
+      class: 'fas fa-camera text-warning'
+    }
+  ]
 
   ngOnInit(): void {
     this.getPhotos();
@@ -33,7 +51,7 @@ export class DashboardComponent implements OnInit {
     const params = new ListParams(null, 0, 20);
     this.photos$ = this.commonRepositoryService.getPhotos(params).pipe(
       tap((photos) => {
-        this.photosCount = photos.length;
+        this.photosCount.set(photos.length);
       })
     )
   }
@@ -42,7 +60,7 @@ export class DashboardComponent implements OnInit {
     const params = new ListParams(null, 0, 20);
     this.posts$ = this.commonRepositoryService.getPosts(params).pipe(
       tap((posts) => {
-        this.postsCount = posts.length;
+        this.postsCount.set(posts.length);
       })
     )
   }
