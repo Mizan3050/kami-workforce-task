@@ -4,6 +4,7 @@ import { CommonApiService } from './common-api.service';
 import { Observable, delay, map, of, tap } from 'rxjs';
 import { Photo } from '../../main/photos/interface/photos.interface';
 import { Post } from '../../main/posts/interface/post.interface';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +18,7 @@ export class CommonRepositoryService {
   #cachedPhotosWithId = new Map<string, Photo>();
   #cachedPostsWithId = new Map<string, Post>();
 
-  constructor() { }
+  constructor(private router: Router, private activatedRoute: ActivatedRoute) { }
 
   getPhotos(params: ListParams) {
     if (this.#cachedPhotos.size) {
@@ -73,5 +74,20 @@ export class CommonRepositoryService {
         tap((postDetail) => this.#cachedPostsWithId.set(id, postDetail))
       )
     }
+  }
+
+  setQueryParam(params: any): void {
+    // Retrieve existing query parameters
+    const queryParams = this.activatedRoute.snapshot.queryParams;
+
+    // Add or update a query parameter (e.g., 'filter')
+    const updatedQueryParams = { ...queryParams, ...params };
+
+    // Navigate with the updated query parameters
+    this.router.navigate([], {
+      relativeTo: this.activatedRoute, // Keep the current route
+      queryParams: updatedQueryParams,
+      queryParamsHandling: 'merge', // Merge with existing query params
+    });
   }
 }

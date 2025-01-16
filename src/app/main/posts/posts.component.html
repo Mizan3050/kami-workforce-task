@@ -1,30 +1,49 @@
-<div
-  class="posts-list-container d-flex align-items-center justify-content-between flex-wrap"
->
-  <ng-container *ngIf="posts$ | async as posts; else postDetailLoader">
-    <div
-      class="card clickable"
-      *ngFor="let post of posts; index as i"
-      [routerLink]="'/posts/' + post.id"
-      routerLinkActive="router-link-active"
+<div class="posts-list-container">
+  <div class="input-group mb-4">
+    <input
+      type="text"
+      class="form-control"
+      placeholder="Search Photo"
+      aria-label="search-photo"
+      [formControl]="searchControl"
+    />
+    <select
+      class="form-select"
+      aria-label="Default select example"
+      #selectSort
+      (change)="sortChange(selectSort)"
     >
-      <div class="card-body">
-        <h6 class="text-start mb-1">
-          <strong>Post: {{ i + 1 }}</strong>
-        </h6>
-        <h6 class="card-title text-start">
-          <strong>Title: </strong>{{ post.title }}
-        </h6>
-        <p class="card-text text-start mt-2">
-          <strong>Description: </strong>{{ post.body }}
-        </p>
+      <option selected>Sort By</option>
+      <option value="id" [selected]="sortQueryParam === 'id'">Asc ID</option>
+      <option value="-id" [selected]="sortQueryParam === '-id'">Desc ID</option>
+    </select>
+  </div>
+  <div class="d-flex align-items-center justify-content-between flex-wrap mt-4">
+    <ng-container *ngIf="posts$ | async as posts; else postDetailLoader">
+      <div
+        class="card clickable"
+        *ngFor="let post of posts; index as i"
+        [routerLink]="'/posts/' + post.id"
+        routerLinkActive="router-link-active"
+      >
+        <div class="card-body">
+          <h6 class="text-start mb-1">
+            <strong>Post: {{ i + 1 }}</strong>
+          </h6>
+          <h6 class="card-title text-start">
+            <strong>Title: </strong>{{ post.title }}
+          </h6>
+          <p class="card-text text-start mt-2">
+            <strong>Description: </strong>{{ post.body }}
+          </p>
+        </div>
       </div>
-    </div>
-  </ng-container>
+    </ng-container>
 
-  <ng-template #postDetailLoader>
-    <div class="loader d-flex align-items-center justify-content-center h-50">
-      <app-loader *ngIf="postsLoading()"> </app-loader>
-    </div>
-  </ng-template>
+    <ng-template #postDetailLoader>
+      <div class="loader d-flex align-items-center justify-content-center h-50">
+        <app-loader *ngIf="postsLoading()"> </app-loader>
+      </div>
+    </ng-template>
+  </div>
 </div>

@@ -1,13 +1,12 @@
-import { Component, DestroyRef, OnInit, Signal, WritableSignal, inject, signal } from '@angular/core';
-import { DashboardSidebarComponent } from '../../core/components/dashboard-sidebar/dashboard-sidebar.component';
 import { AsyncPipe, NgFor, NgIf } from '@angular/common';
-import { CommonRepositoryService } from '../../core/common/common-repository.service';
-import { Observable, tap } from 'rxjs';
-import { ListParams } from '../../core/models/list-params.model';
-import { Photo } from '../photos/interface/photos.interface';
-import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
-import { LoaderComponent } from "../../shared/components/loader/loader.component";
+import { Component, DestroyRef, OnInit, WritableSignal, inject, signal } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Router } from '@angular/router';
+import { Observable, tap } from 'rxjs';
+import { CommonRepositoryService } from '../../core/common/common-repository.service';
+import { ListParams } from '../../core/models/list-params.model';
+import { LoaderComponent } from "../../shared/components/loader/loader.component";
+import { Photo } from '../photos/interface/photos.interface';
 
 @Component({
   selector: 'app-dashboard',
@@ -56,7 +55,7 @@ export class DashboardComponent implements OnInit {
   }
 
   getPhotos() {
-    const params = new ListParams(null, 0, 20);
+    const params = new ListParams(0, 20);
     this.photosLoading.set(true);
     this.photos$ = this.#commonRepositoryService.getPhotos(params).pipe(
       tap((photos) => {
@@ -75,7 +74,7 @@ export class DashboardComponent implements OnInit {
   }
 
   getPosts() {
-    const params = new ListParams(null, 0, 20);
+    const params = new ListParams(0, 20);
     this.postsLoading.set(true);
     this.posts$ = this.#commonRepositoryService.getPosts(params).pipe(
       tap((posts) => {
@@ -86,7 +85,7 @@ export class DashboardComponent implements OnInit {
   }
 
   getAlbums() {
-    const params = new ListParams(null, 0, 20);
+    const params = new ListParams(0, 20);
     this.#commonRepositoryService.getAlbums(params).pipe(
       tap((albums) => {
         this.albumsCount.set(albums.length);

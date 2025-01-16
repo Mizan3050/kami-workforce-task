@@ -58,11 +58,10 @@ export class CommonApiService {
   }
 
   private getListHttpParams(params: ListParams): HttpParams {
-    const { _start = 0, _limit = 20, _sort = '' } = params || null;
+    const { _start = 0, _limit = 20 } = params || null;
     const httpParams: HttpParams = new HttpParams()
       .set('_start', _start)
       .set('_limit', _limit)
-      .set('_sort', _sort)
     return httpParams
   }
 
