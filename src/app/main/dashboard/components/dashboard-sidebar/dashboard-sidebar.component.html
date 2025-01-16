@@ -1,29 +1,40 @@
 <div class="dashboard-sidebar d-flex flex-column flex-shrink-0 p-3 bg-light">
-  <a
-    href="/"
-    class="d-flex align-items-center mb-md-0 me-md-auto link-dark text-decoration-none"
-  >
-    <span class="fs-4 text-start">Social Grid</span>
-  </a>
-  <span class="fs-6 text-start">Workspace</span>
+  <div class="d-flex justify-content-start align-items-center">
+    <i class="sidebar-logo fa-solid fa-layer-group"></i>
+    <div class="d-flex flex-column justify-content-start align-items-start">
+      <a
+        href="/"
+        class="d-flex align-items-center mb-md-0 me-md-auto link-dark text-decoration-none"
+      >
+        <span class="sidebar-title fs-5 text-start fw-semibold"
+          >Social Grid</span
+        >
+      </a>
+      <span class="fs-6 text-start text-muted">Workspace</span>
+    </div>
+  </div>
   <ul class="nav nav-pills flex-column mb-auto mt-4">
     <li class="nav-item">
-      <a class="nav-link active" aria-current="page"
+      <a
+        class="nav-link"
+        routerLink="/dashboard"
+        routerLinkActive="active"
+        aria-current="page"
         ><i class="fa fa-bar-chart" aria-hidden="true"></i> Dashboard
       </a>
     </li>
     <li>
-      <a class="nav-link link-dark"
+      <a routerLink="/posts" class="nav-link link-dark"
         ><i class="fa-regular fa-pen-to-square"></i> Posts
       </a>
     </li>
     <li>
-      <a class="nav-link link-dark"
+      <a class="nav-link link-dark" routerLink="/albums"
         ><i class="fa-solid fa-photo-film"></i> Albums
       </a>
     </li>
     <li>
-      <a class="nav-link link-dark"
+      <a class="nav-link link-dark" routerLink="/photos"
         ><i class="fa-regular fa-image"></i> Photos
       </a>
     </li>

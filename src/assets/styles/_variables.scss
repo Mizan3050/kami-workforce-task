@@ -8,12 +8,12 @@ h3,
 h4,
 h5,
 h6,
-a,
+span,
 strong {
-  margin: 0;
-  padding: 0;
+  margin: 0 !important;
+  padding: 0 !important;
 }
 
 .clickable {
-  cursor: pointer;
+  cursor: pointer !important;
 }

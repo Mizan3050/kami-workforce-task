@@ -4,10 +4,9 @@
     <div class="row">
       <!-- Left Column -->
       <div class="col-lg-6 col-md-12">
-        <div class="analytics white-pane mb-4 d-flex align-items-center">
+        <div class="analytics white-pane mb-4 d-flex align-items-center justify-content-center">
           <div class="container">
             <div class="row text-center">
-              <!-- Posts -->
               <div class="col-md-4" *ngFor="let widget of summary_widgets">
                 <div class="info-box">
                   <i [class]="widget.class"></i>
@@ -31,7 +30,6 @@
             >
               <div class="album-card mb-3" *ngFor="let photo of photos">
                 <img
-                *ngIf="false"
                   [src]="photo.thumbnailUrl"
                   alt="Photo Thumbnail"
                   class="img-fluid"
