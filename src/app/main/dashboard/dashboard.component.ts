@@ -6,10 +6,11 @@ import { Observable, tap } from 'rxjs';
 import { ListParams } from '../../core/models/list-params.model';
 import { Photo } from '../photos/interface/photos.interface';
 import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
+import { LoaderComponent } from "../../shared/components/loader/loader.component";
 
 @Component({
   selector: 'app-dashboard',
-  imports: [DashboardSidebarComponent, AsyncPipe, NgIf, NgFor],
+  imports: [DashboardSidebarComponent, AsyncPipe, NgIf, NgFor, LoaderComponent],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss'
 })
@@ -17,9 +18,11 @@ export class DashboardComponent implements OnInit {
 
   photos$!: Observable<Array<Photo>>;
   photosCount: WritableSignal<number> = signal(0);
+  photosLoading: WritableSignal<boolean> = signal(false);
 
   posts$!: Observable<Array<any>>;
   postsCount: WritableSignal<number> = signal(0);
+  postsLoading: WritableSignal<boolean> = signal(false);
 
   albumsCount: WritableSignal<number> = signal(0);
 
@@ -52,8 +55,10 @@ export class DashboardComponent implements OnInit {
 
   getPhotos() {
     const params = new ListParams(null, 0, 20);
+    this.photosLoading.set(true);
     this.photos$ = this.#commonRepositoryService.getPhotos(params).pipe(
       tap((photos) => {
+        this.photosLoading.set(false);
         this.photosCount.set(photos.length);
       })
     )
@@ -61,8 +66,10 @@ export class DashboardComponent implements OnInit {
 
   getPosts() {
     const params = new ListParams(null, 0, 20);
+    this.postsLoading.set(true);
     this.posts$ = this.#commonRepositoryService.getPosts(params).pipe(
       tap((posts) => {
+        this.postsLoading.set(false);
         this.postsCount.set(posts.length);
       })
     )

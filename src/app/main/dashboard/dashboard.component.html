@@ -4,18 +4,26 @@
     <div class="row">
       <!-- Left Column -->
       <div class="col-lg-6 col-md-12">
-        <div class="analytics white-pane mb-4 d-flex align-items-center justify-content-center">
+        <div
+          class="analytics white-pane mb-4 d-flex align-items-center justify-content-center"
+        >
           <div class="container">
             <div class="row text-center">
-              <div class="col-md-4" *ngFor="let widget of summary_widgets">
-                <div class="info-box">
-                  <i [class]="widget.class"></i>
-                  <div>
-                    <small class="text-muted">{{ widget.title }}</small> <br />
-                    <span>{{ widget.count() }}</span>
+              <ng-container *ngIf="!postsLoading(); else postsLoader">
+                <div class="col-md-4" *ngFor="let widget of summary_widgets">
+                  <div class="info-box">
+                    <i [class]="widget.class"></i>
+                    <div>
+                      <small class="text-muted">{{ widget.title }}</small>
+                      <br />
+                      <span>{{ widget.count() }}</span>
+                    </div>
                   </div>
                 </div>
-              </div>
+              </ng-container>
+              <ng-template #postsLoader>
+                <app-loader *ngIf="postsLoading()"> </app-loader>
+              </ng-template>
             </div>
           </div>
         </div>
@@ -24,7 +32,7 @@
             <span>Recent Photos:</span>
             <p class="text-secondary m-0">({{ photosCount() }})</p>
           </div>
-          <ng-container *ngIf="photos$ | async as photos">
+          <ng-container *ngIf="photos$ | async as photos; else photosLoader">
             <div
               class="photo-list d-flex flex-wrap justify-content-between clickable"
             >
@@ -38,6 +46,9 @@
               </div>
             </div>
           </ng-container>
+          <ng-template #photosLoader>
+            <app-loader *ngIf="photosLoading()"> </app-loader>
+          </ng-template>
         </div>
       </div>
       <!-- Right Column -->
@@ -47,13 +58,16 @@
             <span>Top Posts:</span>
             <p class="text-secondary m-0">({{ postsCount() }})</p>
           </div>
-          <ng-container *ngIf="posts$ | async as posts">
+          <ng-container *ngIf="posts$ | async as posts; else postsLoader">
             <div class="flex-column mt-3" *ngFor="let post of posts">
               <h6 class="text-secondary">{{ "@" + post.userId }}</h6>
               <h5 class="text-primary clickable">{{ post.title }}</h5>
               <p class="mt-1 text-black-50">{{ post.body }}</p>
             </div>
           </ng-container>
+          <ng-template #postsLoader>
+            <app-loader *ngIf="postsLoading()"> </app-loader>
+          </ng-template>
         </div>
       </div>
     </div>
