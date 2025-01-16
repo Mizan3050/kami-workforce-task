@@ -1,0 +1,66 @@
+<div
+  class="dashboard-sidebar d-flex flex-column flex-shrink-0 bg-light"
+  style="width: 4.5rem"
+>
+  <div class="d-flex justify-content-center align-items-center mt-2 mb-2">
+    <a class="nav-link link-dark" routerLink="/dashboard">
+      <i class="sidebar-logo fa-solid fa-layer-group"></i>
+    </a>
+  </div>
+  <ul class="nav nav-pills nav-flush flex-column mb-auto text-center">
+    <li class="nav-item">
+      <a
+        class="nav-link link-dark py-3 border-bottom"
+        aria-current="page"
+        title="Dashboard"
+        routerLink="/dashboard"
+        routerLinkActive="active"
+      >
+        <i class="fa fa-bar-chart" aria-hidden="true"></i>
+      </a>
+    </li>
+    <li>
+      <a
+        aria-current="page"
+        title="Posts"
+        routerLink="/posts"
+        class="nav-link link-dark border-bottom"
+        routerLinkActive="active"
+      >
+        <i class="fa-regular fa-pen-to-square"></i>
+      </a>
+    </li>
+    <li>
+      <a
+        routerLink="/albums"
+        class="nav-link link-dark border-bottom"
+        routerLinkActive="active"
+      >
+        <i class="fa-solid fa-photo-film"></i>
+      </a>
+    </li>
+    <li>
+      <a
+        routerLink="/photos"
+        class="nav-link link-dark border-bottom"
+        routerLinkActive="active"
+      >
+        <i class="fa-regular fa-image"></i>
+      </a>
+    </li>
+  </ul>
+  <div class="dropdown border-top">
+    <a
+      class="d-flex align-items-center justify-content-center p-3 link-dark text-decoration-none"
+      id="dropdownUser3"
+    >
+      <img
+        src="https://github.com/mdo.png"
+        alt="mdo"
+        width="24"
+        height="24"
+        class="rounded-circle"
+      />
+    </a>
+  </div>
+</div>
