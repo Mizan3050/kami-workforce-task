@@ -3,7 +3,7 @@ import { Component, DestroyRef, OnInit, WritableSignal, inject, signal } from '@
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Router } from '@angular/router';
 import { Observable, tap } from 'rxjs';
-import { CommonRepositoryService } from '../../core/common/common-repository.service';
+import { CommonRepositoryService } from '../../core/services/common-repository.service';
 import { ListParams } from '../../core/models/list-params.model';
 import { LoaderComponent } from "../../shared/components/loader/loader.component";
 import { Photo } from '../photos/interface/photos.interface';

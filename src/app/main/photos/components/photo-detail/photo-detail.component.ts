@@ -1,6 +1,6 @@
 import { Component, inject, signal } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { CommonRepositoryService } from '../../../../core/common/common-repository.service';
+import { CommonRepositoryService } from '../../../../core/services/common-repository.service';
 import { AsyncPipe, NgIf } from '@angular/common';
 import { Observable, map, of, tap } from 'rxjs';
 import { LoaderComponent } from '../../../../shared/components/loader/loader.component';

@@ -3,7 +3,7 @@ import { Component, OnInit, inject, signal } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { Observable, debounceTime, distinctUntilChanged, map, tap } from 'rxjs';
-import { CommonRepositoryService } from '../../core/common/common-repository.service';
+import { CommonRepositoryService } from '../../core/services/common-repository.service';
 import { ListParams } from '../../core/models/list-params.model';
 import { LoaderComponent } from "../../shared/components/loader/loader.component";
 import { Post } from './interface/post.interface';
