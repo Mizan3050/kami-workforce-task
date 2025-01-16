@@ -7,10 +7,11 @@ import { CommonRepositoryService } from '../../core/services/common-repository.s
 import { ListParams } from '../../core/models/list-params.model';
 import { LoaderComponent } from "../../shared/components/loader/loader.component";
 import { Post } from './interface/post.interface';
+import { PaginatorComponent } from "../../shared/components/paginator/paginator.component";
 
 @Component({
   selector: 'app-posts',
-  imports: [LoaderComponent, NgIf, AsyncPipe, NgFor, RouterLink, ReactiveFormsModule],
+  imports: [LoaderComponent, NgIf, AsyncPipe, NgFor, RouterLink, ReactiveFormsModule, PaginatorComponent],
   templateUrl: './posts.component.html',
   styleUrl: './posts.component.scss'
 })

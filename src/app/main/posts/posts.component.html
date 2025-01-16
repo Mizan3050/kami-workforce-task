@@ -53,21 +53,11 @@
       </div>
     </ng-template>
   </div>
-  <nav aria-label="Page navigation example" *ngIf="!postsLoading()">
-    <ul class="pagination">
-      <li class="page-item" (click)="previousPage()">
-        <a class="page-link clickable" aria-label="Previous">
-          <span aria-hidden="true">&laquo;</span>
-        </a>
-      </li>
-      <li class="page-item">
-        <a class="page-link">{{ start }} to {{ end }}</a>
-      </li>
-      <li class="page-item" (click)="nextPage()">
-        <a class="page-link clickable" aria-label="Next">
-          <span aria-hidden="true">&raquo;</span>
-        </a>
-      </li>
-    </ul>
-  </nav>
+  <app-paginator
+    *ngIf="!postsLoading()"
+    [start]="start"
+    [end]="end"
+    (nextPage)="nextPage()"
+    (previousPage)="previousPage()"
+  ></app-paginator>
 </div>

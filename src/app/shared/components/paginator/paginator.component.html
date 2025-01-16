@@ -1,0 +1,17 @@
+<nav aria-label="Page navigation example">
+  <ul class="pagination">
+    <li class="page-item" (click)="previousPage.emit()">
+      <a class="page-link clickable" aria-label="Previous">
+        <span aria-hidden="true">&laquo;</span>
+      </a>
+    </li>
+    <li class="page-item">
+      <a class="page-link">{{ start() }} to {{ end() }}</a>
+    </li>
+    <li class="page-item" (click)="nextPage.emit()">
+      <a class="page-link clickable" aria-label="Next">
+        <span aria-hidden="true">&raquo;</span>
+      </a>
+    </li>
+  </ul>
+</nav>
