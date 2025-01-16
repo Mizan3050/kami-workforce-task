@@ -1,10 +1,10 @@
 import { Injectable, inject } from '@angular/core';
-import { ListParams } from '../models/list-params.model';
-import { CommonApiService } from './common-api.service';
-import { Observable, delay, map, of, tap } from 'rxjs';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Observable, of, tap } from 'rxjs';
 import { Photo } from '../../main/photos/interface/photos.interface';
 import { Post } from '../../main/posts/interface/post.interface';
-import { Router, ActivatedRoute } from '@angular/router';
+import { ListParams } from '../models/list-params.model';
+import { CommonApiService } from './common-api.service';
 
 @Injectable({
   providedIn: 'root'
