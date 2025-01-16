@@ -70,6 +70,10 @@ export class DashboardComponent implements OnInit {
     this.#router.navigate(['photos', id])
   }
 
+  goToPostDetail(id: number) {
+    this.#router.navigate(['posts', id])
+  }
+
   getPosts() {
     const params = new ListParams(null, 0, 20);
     this.postsLoading.set(true);

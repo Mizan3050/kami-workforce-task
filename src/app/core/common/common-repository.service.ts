@@ -31,4 +31,9 @@ export class CommonRepositoryService {
       // delay(50000)
     )
   }
+  getPostDetail(id:string) {
+    return this.#commonApiService.getPostDetail(id).pipe(
+      // delay(50000)
+    )
+  }
 }

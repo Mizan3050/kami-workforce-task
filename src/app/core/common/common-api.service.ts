@@ -4,6 +4,7 @@ import { environment } from '../../../environment/environment';
 import { ListParams } from '../models/list-params.model';
 import { Observable, map } from 'rxjs';
 import { Photo } from '../../main/photos/interface/photos.interface';
+import { Post } from '../../main/posts/interface/post.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -40,8 +41,12 @@ export class CommonApiService {
     )
   }
 
-  getPosts(_params: ListParams): Observable<Array<Photo>> {
-    return this.#http.get<Array<Photo>>(`${environment.apiUrl}/posts/`, {
+  getPostDetail(id: string) {
+    return this.#http.get<Post>(`${environment.apiUrl}/posts/${id}`)
+  }
+
+  getPosts(_params: ListParams): Observable<Array<Post>> {
+    return this.#http.get<Array<Post>>(`${environment.apiUrl}/posts/`, {
       params: this.getListHttpParams(_params)
     })
   }

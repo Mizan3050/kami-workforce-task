@@ -1,0 +1,18 @@
+<div class="d-flex align-items-center h-50 justify-content-center">
+  <ng-container
+    *ngIf="postDetail$ | async as postDetail; else postDetailLoader"
+  >
+    <div class="card" style="width: 20rem">
+      <div class="card-body">
+        <h5 class="card-title text-center">{{ postDetail.title }}</h5>
+        <p class="card-text mt-2">{{ postDetail.body }}</p>
+      </div>
+    </div>
+  </ng-container>
+
+  <ng-template #postDetailLoader>
+    <div class="d-flex align-items-center justify-content-center">
+      <app-loader *ngIf="postDetailLoading()"> </app-loader>
+    </div>
+  </ng-template>
+</div>

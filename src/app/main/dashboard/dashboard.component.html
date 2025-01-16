@@ -34,7 +34,11 @@
           <div
             class="photo-list d-flex flex-wrap justify-content-between clickable"
           >
-            <div class="album-card mb-3" *ngFor="let photo of photos" (click)="goToPhotoDetail(photo.id)">
+            <div
+              class="album-card mb-3"
+              *ngFor="let photo of photos"
+              (click)="goToPhotoDetail(photo.id)"
+            >
               <img
                 [src]="photo.thumbnailUrl"
                 alt="Photo Thumbnail"
@@ -59,7 +63,12 @@
         <ng-container *ngIf="posts$ | async as posts; else postsLoader">
           <div class="flex-column mt-3" *ngFor="let post of posts">
             <h6 class="text-secondary">{{ "@" + post.userId }}</h6>
-            <h5 class="text-primary clickable">{{ post.title }}</h5>
+            <h5
+              class="text-primary clickable"
+              (click)="goToPostDetail(post.id)"
+            >
+              {{ post.title }}
+            </h5>
             <p class="mt-1 text-black-50">{{ post.body }}</p>
           </div>
         </ng-container>
