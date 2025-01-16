@@ -1,6 +1,6 @@
 import { Injectable, inject } from '@angular/core';
-import { CommonApiService } from './common-api.service';
 import { ListParams } from '../models/list-params.model';
+import { CommonApiService } from './common-api.service';
 
 @Injectable({
   providedIn: 'root'
@@ -8,16 +8,22 @@ import { ListParams } from '../models/list-params.model';
 export class CommonRepositoryService {
 
   #commonApiService = inject(CommonApiService)
-  
+
   constructor() { }
 
   getPhotos(params: ListParams) {
-    return this.#commonApiService.getPhotos(params)
+    return this.#commonApiService.getPhotos(params).pipe(
+      // delay(50000)
+    )
   }
   getPosts(params: ListParams) {
-    return this.#commonApiService.getPosts(params)
+    return this.#commonApiService.getPosts(params).pipe(
+      // delay(50000)
+    )
   }
   getAlbums(params: ListParams) {
-    return this.#commonApiService.getAlbums(params)
+    return this.#commonApiService.getAlbums(params).pipe(
+      // delay(50000)
+    )
   }
 }
