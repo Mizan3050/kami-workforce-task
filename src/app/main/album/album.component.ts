@@ -1,7 +1,7 @@
 import { AsyncPipe, NgFor, NgIf } from '@angular/common';
 import { Component, inject, signal } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { Observable, debounceTime, distinctUntilChanged, map, tap } from 'rxjs';
 import { ListParams } from '../../core/models/list-params.model';
 import { CommonRepositoryService } from '../../core/services/common-repository.service';
@@ -11,7 +11,7 @@ import { Album } from './interface/album.interface';
 
 @Component({
   selector: 'app-album',
-  imports: [LoaderComponent, PaginatorComponent, ReactiveFormsModule, NgIf, AsyncPipe, NgFor, RouterLink],
+  imports: [LoaderComponent, PaginatorComponent, ReactiveFormsModule, NgIf, AsyncPipe, NgFor],
   templateUrl: './album.component.html',
   styleUrl: './album.component.scss'
 })
@@ -60,11 +60,11 @@ export class AlbumComponent {
       tap(() => {
         this.albumsLoading.set(false)
       }),
-      map((posts) => posts.filter((post) => post.title.includes(this.searchControl.value || ''))),
-      map((posts) => {
+      map((albums) => albums.filter((album) => album.title.includes(this.searchControl.value || ''))),
+      map((albums) => {
         const sortQueryParam = this.sortQueryParam
         if (sortQueryParam?.length) {
-          return posts.sort((a, b) => {
+          return albums.sort((a, b) => {
             if (sortQueryParam === '-id') {
               return a.id - b.id
             } else {
@@ -72,7 +72,7 @@ export class AlbumComponent {
             }
           })
         } else {
-          return posts
+          return albums
         }
       })
     )
