@@ -56,7 +56,7 @@ export class PostsComponent implements OnInit {
   getPosts() {
     const { _limit, _start } = this.#paginator;
     const params: ListParams = new ListParams(_start, _limit);
-    this.postsLoading = signal(true);
+    this.postsLoading.set(true);
     this.posts$ = this.#commonRepositoryService.getPosts(params).pipe(
       tap(() => {
         this.postsLoading.set(false)

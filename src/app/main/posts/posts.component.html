@@ -26,7 +26,7 @@
     </button>
   </div>
   <div class="d-flex align-items-center justify-content-between flex-wrap mt-4">
-    <ng-container *ngIf="posts$ | async as posts; else postDetailLoader">
+    <ng-container *ngIf="posts$ | async as posts; else postsLoader">
       <div
         class="card clickable"
         *ngFor="let post of posts; index as i"
@@ -47,7 +47,7 @@
       </div>
     </ng-container>
 
-    <ng-template #postDetailLoader>
+    <ng-template #postsLoader>
       <div class="loader d-flex align-items-center justify-content-center h-50">
         <app-loader *ngIf="postsLoading()"> </app-loader>
       </div>

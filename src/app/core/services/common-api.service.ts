@@ -5,6 +5,7 @@ import { ListParams } from '../models/list-params.model';
 import { Observable, map } from 'rxjs';
 import { Photo } from '../../main/photos/interface/photos.interface';
 import { Post } from '../../main/posts/interface/post.interface';
+import { Album } from '../../main/album/interface/album.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -51,8 +52,8 @@ export class CommonApiService {
     })
   }
 
-  getAlbums(_params: ListParams): Observable<Array<Photo>> {
-    return this.#http.get<Array<Photo>>(`${environment.apiUrl}/albums/`, {
+  getAlbums(_params: ListParams): Observable<Array<Album>> {
+    return this.#http.get<Array<Album>>(`${environment.apiUrl}/albums/`, {
       params: this.getListHttpParams(_params)
     })
   }

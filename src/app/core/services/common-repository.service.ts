@@ -5,6 +5,7 @@ import { Photo } from '../../main/photos/interface/photos.interface';
 import { Post } from '../../main/posts/interface/post.interface';
 import { ListParams } from '../models/list-params.model';
 import { CommonApiService } from './common-api.service';
+import { Album } from '../../main/album/interface/album.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,7 @@ export class CommonRepositoryService {
 
   #commonApiService = inject(CommonApiService)
   #cachedPhotos = new Set<Photo>();
-  #cachedAlbums = new Set<any>();
+  #cachedAlbums = new Set<Album>();
   #cachedPosts = new Set<Post>();
   #cachedPhotosWithId = new Map<string, Photo>();
   #cachedPostsWithId = new Map<string, Post>();
@@ -56,7 +57,7 @@ export class CommonRepositoryService {
 
   getAlbums(params: ListParams) {
     if (this.#cachedAlbums.size) {
-      return of(Array.from(this.#cachedPhotos))
+      return of(Array.from(this.#cachedAlbums))
     } else {
       return this.#commonApiService.getAlbums(params).pipe(
         tap((albums) => {

@@ -1,0 +1,27 @@
+:host {
+    width: 100%;
+  }
+  .card {
+    border: none;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  }
+  
+  .albums-list-container .card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 250px;
+    width: 20rem;
+    margin-bottom: 25px;
+    color: rgb(46, 46, 112);
+  }
+  
+  .albums-list-container {
+    padding: 20px 30px;
+    overflow: auto;
+    height: 100vh;
+  }
+  
+  .loader {
+    width: 100%;
+  }
