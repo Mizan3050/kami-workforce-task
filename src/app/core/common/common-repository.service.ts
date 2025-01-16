@@ -44,6 +44,16 @@ export class CommonRepositoryService {
     }
   }
 
+  postsRefresh() {
+    this.#cachedPosts.clear();
+  }
+  albumsRefresh() {
+    this.#cachedAlbums.clear();
+  }
+  photosRefresh() {
+    this.#cachedPhotos.clear();
+  }
+
   getAlbums(params: ListParams) {
     if (this.#cachedAlbums.size) {
       return of(Array.from(this.#cachedPhotos))
@@ -88,6 +98,11 @@ export class CommonRepositoryService {
       relativeTo: this.activatedRoute, // Keep the current route
       queryParams: updatedQueryParams,
       queryParamsHandling: 'merge', // Merge with existing query params
+    });
+  }
+  clearQueryParams() {
+    this.router.navigate([], {
+      relativeTo: this.activatedRoute
     });
   }
 }

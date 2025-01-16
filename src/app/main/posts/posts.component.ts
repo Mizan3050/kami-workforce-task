@@ -21,8 +21,22 @@ export class PostsComponent implements OnInit {
 
   searchQueryParam = this.#route.snapshot.queryParamMap.get('search') || '';
   sortQueryParam = this.#route.snapshot.queryParamMap.get('sort') || '';
-  postsLoading = signal(true);
+  startQueryParam = this.#route.snapshot.queryParamMap.get('_start') || 0;
+  limitQueryParam = this.#route.snapshot.queryParamMap.get('_limit') || 20;
+  postsLoading = signal(false);
   posts$!: Observable<Array<Post>>
+
+  #paginator = {
+    _start: +this.startQueryParam,
+    _limit: +this.limitQueryParam
+  }
+
+  get start() {
+    return this.#paginator._start
+  }
+  get end() {
+    return this.#paginator._start + this.#paginator._limit
+  }
 
   searchControl = new FormControl(this.searchQueryParam);
 
@@ -39,7 +53,9 @@ export class PostsComponent implements OnInit {
   }
 
   getPosts() {
-    const params: ListParams = new ListParams();
+    const { _limit, _start } = this.#paginator;
+    const params: ListParams = new ListParams(_start, _limit);
+    this.postsLoading = signal(true);
     this.posts$ = this.#commonRepositoryService.getPosts(params).pipe(
       tap(() => {
         this.postsLoading.set(false)
@@ -70,6 +86,34 @@ export class PostsComponent implements OnInit {
       this.sortQueryParam = ''
       this.#commonRepositoryService.setQueryParam({ sort: '' })
     }
+    this.getPosts()
+  }
+
+  nextPage() {
+    this.#paginator._start = this.#paginator._start + this.#paginator._limit;
+    this.#commonRepositoryService.setQueryParam(this.#paginator)
+    this.#commonRepositoryService.postsRefresh();
+    this.getPosts()
+  }
+
+  previousPage() {
+    if (this.#paginator._start - this.#paginator._limit >= 0) {
+      this.#paginator._start = this.#paginator._start - this.#paginator._limit;
+      this.#commonRepositoryService.setQueryParam(this.#paginator)
+      this.#commonRepositoryService.postsRefresh();
+      this.getPosts()
+    }
+  }
+
+  clearFilters() {
+    this.#paginator = {
+      _start: 0,
+      _limit: 20
+    }
+    this.searchControl.patchValue('', { emitEvent: false })
+    this.sortQueryParam = '';
+    this.#commonRepositoryService.clearQueryParams();
+    this.#commonRepositoryService.postsRefresh();
     this.getPosts()
   }
 }
