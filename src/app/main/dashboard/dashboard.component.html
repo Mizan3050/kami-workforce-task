@@ -1,74 +1,71 @@
-<div class="d-flex">
-  <dashboard-sidebar></dashboard-sidebar>
-  <div class="dashboard">
-    <div class="row">
-      <!-- Left Column -->
-      <div class="col-lg-6 col-md-12">
-        <div
-          class="analytics white-pane mb-4 d-flex align-items-center justify-content-center"
-        >
-          <div class="container">
-            <div class="row text-center">
-              <ng-container *ngIf="!postsLoading(); else postsLoader">
-                <div class="col-md-4" *ngFor="let widget of summary_widgets">
-                  <div class="info-box">
-                    <i [class]="widget.class"></i>
-                    <div>
-                      <small class="text-muted">{{ widget.title }}</small>
-                      <br />
-                      <span>{{ widget.count() }}</span>
-                    </div>
+<div class="dashboard">
+  <div class="row">
+    <!-- Left Column -->
+    <div class="col-lg-6 col-md-12">
+      <div
+        class="analytics white-pane mb-4 d-flex align-items-center justify-content-center"
+      >
+        <div class="container">
+          <div class="row text-center">
+            <ng-container *ngIf="!postsLoading(); else postsLoader">
+              <div class="col-md-4" *ngFor="let widget of summary_widgets">
+                <div class="info-box">
+                  <i [class]="widget.class"></i>
+                  <div>
+                    <small class="text-muted">{{ widget.title }}</small>
+                    <br />
+                    <span>{{ widget.count() }}</span>
                   </div>
                 </div>
-              </ng-container>
-              <ng-template #postsLoader>
-                <app-loader *ngIf="postsLoading()"> </app-loader>
-              </ng-template>
-            </div>
-          </div>
-        </div>
-        <div class="photos white-pane">
-          <div class="d-flex align-items-center justify-content-start mb-3">
-            <span>Recent Photos:</span>
-            <p class="text-secondary m-0">({{ photosCount() }})</p>
-          </div>
-          <ng-container *ngIf="photos$ | async as photos; else photosLoader">
-            <div
-              class="photo-list d-flex flex-wrap justify-content-between clickable"
-            >
-              <div class="album-card mb-3" *ngFor="let photo of photos">
-                <img
-                  [src]="photo.thumbnailUrl"
-                  alt="Photo Thumbnail"
-                  class="img-fluid"
-                />
-                <p class="album-title text-truncate">{{ photo.title }}</p>
               </div>
-            </div>
-          </ng-container>
-          <ng-template #photosLoader>
-            <app-loader *ngIf="photosLoading()"> </app-loader>
-          </ng-template>
+            </ng-container>
+            <ng-template #postsLoader>
+              <app-loader *ngIf="postsLoading()"> </app-loader>
+            </ng-template>
+          </div>
         </div>
       </div>
-      <!-- Right Column -->
-      <div class="col-lg-6 col-md-12">
-        <div class="top-posts white-pane">
-          <div class="d-flex align-items-center justify-content-start mb-4">
-            <span>Top Posts:</span>
-            <p class="text-secondary m-0">({{ postsCount() }})</p>
-          </div>
-          <ng-container *ngIf="posts$ | async as posts; else postsLoader">
-            <div class="flex-column mt-3" *ngFor="let post of posts">
-              <h6 class="text-secondary">{{ "@" + post.userId }}</h6>
-              <h5 class="text-primary clickable">{{ post.title }}</h5>
-              <p class="mt-1 text-black-50">{{ post.body }}</p>
-            </div>
-          </ng-container>
-          <ng-template #postsLoader>
-            <app-loader *ngIf="postsLoading()"> </app-loader>
-          </ng-template>
+      <div class="photos white-pane">
+        <div class="d-flex align-items-center justify-content-start mb-3">
+          <span>Recent Photos:</span>
+          <p class="text-secondary m-0">({{ photosCount() }})</p>
         </div>
+        <ng-container *ngIf="photos$ | async as photos; else photosLoader">
+          <div
+            class="photo-list d-flex flex-wrap justify-content-between clickable"
+          >
+            <div class="album-card mb-3" *ngFor="let photo of photos" (click)="goToPhotoDetail(photo.id)">
+              <img
+                [src]="photo.thumbnailUrl"
+                alt="Photo Thumbnail"
+                class="img-fluid"
+              />
+              <p class="album-title text-truncate">{{ photo.title }}</p>
+            </div>
+          </div>
+        </ng-container>
+        <ng-template #photosLoader>
+          <app-loader *ngIf="photosLoading()"> </app-loader>
+        </ng-template>
+      </div>
+    </div>
+    <!-- Right Column -->
+    <div class="col-lg-6 col-md-12">
+      <div class="top-posts white-pane">
+        <div class="d-flex align-items-center justify-content-start mb-4">
+          <span>Top Posts:</span>
+          <p class="text-secondary m-0">({{ postsCount() }})</p>
+        </div>
+        <ng-container *ngIf="posts$ | async as posts; else postsLoader">
+          <div class="flex-column mt-3" *ngFor="let post of posts">
+            <h6 class="text-secondary">{{ "@" + post.userId }}</h6>
+            <h5 class="text-primary clickable">{{ post.title }}</h5>
+            <p class="mt-1 text-black-50">{{ post.body }}</p>
+          </div>
+        </ng-container>
+        <ng-template #postsLoader>
+          <app-loader *ngIf="postsLoading()"> </app-loader>
+        </ng-template>
       </div>
     </div>
   </div>

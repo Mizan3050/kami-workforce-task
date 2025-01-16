@@ -1,0 +1,16 @@
+<div class="d-flex align-items-center h-50 justify-content-center">
+  <ng-container
+    *ngIf="photoDetail$ | async as photoDetail; else photoDetailLoader"
+  >
+    <div class="album-card mb-3 mt-3">
+      <p class="album-title">{{ photoDetail.title }}</p>
+      <img [src]="photoDetail.url" alt="Photo Thumbnail" class="img-fluid mt-3" />
+    </div>
+  </ng-container>
+
+  <ng-template #photoDetailLoader>
+    <div class="d-flex align-items-center justify-content-center">
+      <app-loader *ngIf="photoDetailLoading()"> </app-loader>
+    </div>
+  </ng-template>
+</div>

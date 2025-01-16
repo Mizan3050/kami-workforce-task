@@ -28,6 +28,18 @@ export class CommonApiService {
     )
   }
 
+  getPhotoDetail(id: string) {
+    return this.#http.get<Photo>(`${environment.apiUrl}/photos/${id}`).pipe(
+      map((photo) =>
+      ({
+        ...photo,
+        thumbnailUrl: this.photoThumbnailReplacer(),
+        url: this.photoUrlReplacer()
+      })
+      )
+    )
+  }
+
   getPosts(_params: ListParams): Observable<Array<Photo>> {
     return this.#http.get<Array<Photo>>(`${environment.apiUrl}/posts/`, {
       params: this.getListHttpParams(_params)
@@ -55,7 +67,7 @@ export class CommonApiService {
   }
   private photoUrlReplacer() {
     const randomColor = `${Math.floor(Math.random() * 16777215).toString(16).padStart(6, '0')}`;
-    return `https://placehold.co/150x150/${randomColor}/FFFFFF/png`
+    return `https://placehold.co/300x300/${randomColor}/FFFFFF/png`
   }
 
 }

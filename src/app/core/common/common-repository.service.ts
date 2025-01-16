@@ -26,4 +26,9 @@ export class CommonRepositoryService {
       // delay(50000)
     )
   }
+  getPhotoDetail(id:string) {
+    return this.#commonApiService.getPhotoDetail(id).pipe(
+      // delay(50000)
+    )
+  }
 }

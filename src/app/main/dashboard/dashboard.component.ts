@@ -7,10 +7,11 @@ import { ListParams } from '../../core/models/list-params.model';
 import { Photo } from '../photos/interface/photos.interface';
 import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
 import { LoaderComponent } from "../../shared/components/loader/loader.component";
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
-  imports: [DashboardSidebarComponent, AsyncPipe, NgIf, NgFor, LoaderComponent],
+  imports: [AsyncPipe, NgIf, NgFor, LoaderComponent],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss'
 })
@@ -45,6 +46,7 @@ export class DashboardComponent implements OnInit {
   ]
 
   #commonRepositoryService = inject(CommonRepositoryService);
+  #router = inject(Router);
   private destroyRef = inject(DestroyRef);
 
   ngOnInit(): void {
@@ -62,6 +64,10 @@ export class DashboardComponent implements OnInit {
         this.photosCount.set(photos.length);
       })
     )
+  }
+
+  goToPhotoDetail(id: number) {
+    this.#router.navigate(['photos', id])
   }
 
   getPosts() {
