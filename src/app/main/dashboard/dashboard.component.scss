@@ -1,3 +1,6 @@
+:host {
+  width: 100%;
+}
 .dashboard {
   background: #e7e7e7;
   padding: 10px;
@@ -33,7 +36,7 @@
     }
   }
   .top-posts {
-    max-height: 93vh;
+    height: 93vh;
     padding: 15px;
     overflow: auto;
   }
@@ -52,4 +55,10 @@
 .info-box span {
   font-weight: bold;
   font-size: 20px;
+}
+
+@media (max-width: 768px) {
+  .post-section {
+    margin-top: 20px; /* Adjust the value as needed */
+  }
 }

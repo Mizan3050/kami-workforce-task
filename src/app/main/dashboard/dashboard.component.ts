@@ -1,5 +1,5 @@
 import { Component, DestroyRef, OnInit, Signal, WritableSignal, inject, signal } from '@angular/core';
-import { DashboardSidebarComponent } from './components/dashboard-sidebar/dashboard-sidebar.component';
+import { DashboardSidebarComponent } from '../../core/components/dashboard-sidebar/dashboard-sidebar.component';
 import { AsyncPipe, NgFor, NgIf } from '@angular/common';
 import { CommonRepositoryService } from '../../core/common/common-repository.service';
 import { Observable, tap } from 'rxjs';
