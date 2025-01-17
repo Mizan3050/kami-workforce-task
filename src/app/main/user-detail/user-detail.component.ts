@@ -1,11 +1,11 @@
 import { AsyncPipe, NgFor, NgIf } from '@angular/common';
 import { Component, OnInit, inject, signal } from '@angular/core';
-import { Router, RouterLink } from '@angular/router';
-import { Observable, map, tap } from 'rxjs';
-import { Post } from '../posts/interface/post.interface';
-import { LoaderComponent } from "../../shared/components/loader/loader.component";
+import { Router } from '@angular/router';
+import { Observable, tap } from 'rxjs';
 import { ListParams } from '../../core/models/list-params.model';
 import { CommonRepositoryService } from '../../core/services/common-repository.service';
+import { LoaderComponent } from "../../shared/components/loader/loader.component";
+import { Post } from '../posts/interface/post.interface';
 
 @Component({
   selector: 'app-user-detail',
