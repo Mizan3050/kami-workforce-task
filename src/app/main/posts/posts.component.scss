@@ -25,3 +25,11 @@
 .loader {
   width: 100%;
 }
+
+
+@media (max-width: 768px) {
+  .posts-list-container .card {
+    width: 15rem;
+    font-size: 0.9rem;
+  }
+}
