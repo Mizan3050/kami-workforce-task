@@ -1,3 +1,10 @@
 :host {
   width: 100% !important;
 }
+
+@media (max-width: 768px) {
+  .album-card {
+    width: 15rem;
+    font-size: 0.9rem;
+  }
+}

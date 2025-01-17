@@ -2,7 +2,7 @@
   <ng-container
     *ngIf="photoDetail$ | async as photoDetail; else photoDetailLoader"
   >
-    <div class="album-card mb-3 mt-3">
+    <div class="album-card mb-3 mt-4">
       <p class="album-title">{{ photoDetail.title }}</p>
       <img [src]="photoDetail.url" alt="Photo Thumbnail" class="img-fluid mt-3" />
     </div>

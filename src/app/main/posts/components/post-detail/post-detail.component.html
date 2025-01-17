@@ -2,7 +2,7 @@
   <ng-container
     *ngIf="postDetail$ | async as postDetail; else postDetailLoader"
   >
-    <div class="card" style="width: 20rem">
+    <div class="card">
       <div class="card-body">
         <h5 class="card-title text-center">{{ postDetail.title }}</h5>
         <p class="card-text mt-2">{{ postDetail.body }}</p>
