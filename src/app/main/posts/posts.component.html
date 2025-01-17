@@ -17,7 +17,6 @@
       <option value="id" [selected]="sortQueryParam === 'id'">Asc ID</option>
       <option value="-id" [selected]="sortQueryParam === '-id'">Desc ID</option>
     </select>
-
   </div>
   <div class="d-flex align-items-center justify-content-between flex-wrap mt-4">
     <ng-container *ngIf="posts$ | async as posts; else postsLoader">
@@ -29,7 +28,7 @@
       >
         <div class="card-body">
           <h6 class="text-start mb-1">
-            <strong>Post: {{ i + 1 }}</strong>
+            <strong>Post: {{ post.id }}</strong>
           </h6>
           <h6 class="card-title text-start">
             <strong>Title: </strong>{{ post.title }}
