@@ -1,10 +1,9 @@
+import { AsyncPipe, NgIf } from '@angular/common';
 import { Component, inject, signal } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable, tap } from 'rxjs';
 import { CommonRepositoryService } from '../../../../core/services/common-repository.service';
-import { Photo } from '../../../photos/interface/photos.interface';
 import { LoaderComponent } from "../../../../shared/components/loader/loader.component";
-import { AsyncPipe, NgIf } from '@angular/common';
 import { Post } from '../../interface/post.interface';
 
 @Component({
@@ -20,7 +19,7 @@ export class PostDetailComponent {
   #commonRepositoryService = inject(CommonRepositoryService);
 
   postDetailLoading = signal(true);
-  postDetail$: Observable<Post> = this.#commonRepositoryService.getPostDetail(this.postId).pipe(
+  postDetail$: Observable<Post | null> = this.#commonRepositoryService.getPostDetail(this.postId).pipe(
     tap(() => {
       this.postDetailLoading.set(true);
     })

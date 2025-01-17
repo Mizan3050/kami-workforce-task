@@ -23,7 +23,7 @@ export class PhotoDetailComponent {
   #commonRepositoryService = inject(CommonRepositoryService);
 
   photoDetailLoading = signal(true);
-  photoDetail$: Observable<Photo> = this.#commonRepositoryService.getPhotoDetail(this.photoId).pipe(
+  photoDetail$: Observable<Photo | null> = this.#commonRepositoryService.getPhotoDetail(this.photoId).pipe(
     tap(() => {
       this.photoDetailLoading.set(true);
     })
