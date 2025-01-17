@@ -1,6 +1,8 @@
 .navbar {
   height: 48px !important;
   background: rgb(21, 21, 55);
+  min-width: 100%;
+  position: relative;
 }
 .navbar-brand {
   color: white;
