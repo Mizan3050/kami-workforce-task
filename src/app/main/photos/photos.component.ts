@@ -1,7 +1,7 @@
 import { NgIf, AsyncPipe, NgFor } from '@angular/common';
 import { Component, inject, signal } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { LoaderComponent } from '../../shared/components/loader/loader.component';
 import { PaginatorComponent } from '../../shared/components/paginator/paginator.component';
 import { Observable, distinctUntilChanged, debounceTime, tap, map } from 'rxjs';
@@ -12,7 +12,7 @@ import { RouteQueryParamsService } from '../../core/services/route-query-params.
 
 @Component({
   selector: 'app-photos',
-  imports: [LoaderComponent, PaginatorComponent, ReactiveFormsModule, NgIf, AsyncPipe, NgFor],
+  imports: [LoaderComponent, PaginatorComponent, RouterLink, ReactiveFormsModule, NgIf, AsyncPipe, NgFor],
   templateUrl: './photos.component.html',
   styleUrl: './photos.component.scss'
 })
@@ -21,7 +21,7 @@ export class PhotosComponent {
   #commonRepositoryService = inject(CommonRepositoryService);
   #route = inject(ActivatedRoute);
   #routeQueryParamsService = inject(RouteQueryParamsService)
-  
+
   searchQueryParam = this.#route.snapshot.queryParamMap.get('search') || '';
   sortQueryParam = this.#route.snapshot.queryParamMap.get('sort') || '';
   startQueryParam = this.#route.snapshot.queryParamMap.get('_start') || 0;
@@ -119,5 +119,5 @@ export class PhotosComponent {
     this.#commonRepositoryService.postsRefresh();
     this.getPhotos()
   }
-  
+
 }

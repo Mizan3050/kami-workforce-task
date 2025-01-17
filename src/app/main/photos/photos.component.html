@@ -17,11 +17,14 @@
       <option value="id" [selected]="sortQueryParam === 'id'">Asc ID</option>
       <option value="-id" [selected]="sortQueryParam === '-id'">Desc ID</option>
     </select>
-
   </div>
   <div class="d-flex align-items-center justify-content-between flex-wrap mt-4">
     <ng-container *ngIf="photos$ | async as photos; else albumsLoader">
-      <div class="card" *ngFor="let photo of photos; index as i">
+      <div
+        class="card clickable"
+        *ngFor="let photo of photos; index as i"
+        [routerLink]="['/photos', photo.id]"
+      >
         <div class="card-body">
           <p class="text-start">
             {{ photo.title }}
