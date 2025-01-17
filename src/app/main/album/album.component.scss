@@ -32,6 +32,12 @@
   }
 }
 
+.input-group{
+  input,select{
+    font-size: smaller;
+  }
+}
+
 @media (max-width: 768px) {
   .albums-list-container .card {
     width: 15rem;
