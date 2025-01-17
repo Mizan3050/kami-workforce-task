@@ -3,13 +3,12 @@ import { Component, OnInit, inject, signal } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { Observable, debounceTime, distinctUntilChanged, map, tap } from 'rxjs';
-import { CommonRepositoryService } from '../../core/services/common-repository.service';
 import { ListParams } from '../../core/models/list-params.model';
-import { LoaderComponent } from "../../shared/components/loader/loader.component";
-import { Post } from './interface/post.interface';
-import { PaginatorComponent } from "../../shared/components/paginator/paginator.component";
+import { CommonRepositoryService } from '../../core/services/common-repository.service';
 import { RouteQueryParamsService } from '../../core/services/route-query-params.service';
-import { HeaderComponent } from '../../core/components/header/header.component';
+import { LoaderComponent } from "../../shared/components/loader/loader.component";
+import { PaginatorComponent } from "../../shared/components/paginator/paginator.component";
+import { Post } from './interface/post.interface';
 
 @Component({
   selector: 'app-posts',
@@ -64,7 +63,7 @@ export class PostsComponent implements OnInit {
       tap(() => {
         this.postsLoading.set(false)
       }),
-      map((posts) => posts.filter((post) => post.title.includes(this.searchControl.value || ''))),
+      map((posts) => posts.filter((post) => post.title.includes(this.searchControl.value?.toLowerCase() || ''))),
       map((posts) => {
         const sortQueryParam = this.sortQueryParam || ''
         if (sortQueryParam.length) {

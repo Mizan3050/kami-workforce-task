@@ -63,7 +63,7 @@ export class PhotosComponent {
       tap(() => {
         this.photosLoading.set(false)
       }),
-      map((photos) => photos.filter((photo) => photo.title.includes(this.searchControl.value || ''))),
+      map((photos) => photos.filter((photo) => photo.title.includes(this.searchControl.value?.toLowerCase() || ''))),
       map((photos) => {
         const sortQueryParam = this.sortQueryParam || '';
         if (sortQueryParam.length) {

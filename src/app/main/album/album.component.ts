@@ -68,7 +68,7 @@ export class AlbumComponent {
       tap(() => {
         this.albumsLoading.set(false)
       }),
-      map((albums) => albums.filter((album) => album.title.includes(this.searchControl.value || ''))),
+      map((albums) => albums.filter((album) => album.title.includes(this.searchControl.value?.toLowerCase()  || ''))),
       map((albums) => {
         const sortQueryParam = this.sortQueryParam || ''
         if (sortQueryParam.length) {
