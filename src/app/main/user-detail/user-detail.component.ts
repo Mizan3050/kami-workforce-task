@@ -1,11 +1,40 @@
-import { Component } from '@angular/core';
+import { AsyncPipe, NgFor, NgIf } from '@angular/common';
+import { Component, OnInit, inject, signal } from '@angular/core';
+import { Router, RouterLink } from '@angular/router';
+import { Observable, map, tap } from 'rxjs';
+import { Post } from '../posts/interface/post.interface';
+import { LoaderComponent } from "../../shared/components/loader/loader.component";
+import { ListParams } from '../../core/models/list-params.model';
+import { CommonRepositoryService } from '../../core/services/common-repository.service';
 
 @Component({
   selector: 'app-user-detail',
-  imports: [],
+  imports: [NgIf, AsyncPipe, LoaderComponent, NgFor],
   templateUrl: './user-detail.component.html',
   styleUrl: './user-detail.component.scss'
 })
-export class UserDetailComponent {
+export class UserDetailComponent implements OnInit {
 
+  #commonRepositoryService = inject(CommonRepositoryService);
+  #router = inject(Router);
+  postsLoading = signal(false);
+  posts$!: Observable<Array<Post>>
+
+  ngOnInit(): void {
+    this.getPosts();
+  }
+
+  getPosts() {
+    const params: ListParams = new ListParams();
+    this.postsLoading.set(true);
+    this.posts$ = this.#commonRepositoryService.getPosts(params).pipe(
+      tap(() => {
+        this.postsLoading.set(false)
+      })
+    )
+  }
+
+  goToPostDetail(id: number) {
+    this.#router.navigate(['posts', id])
+  }
 }

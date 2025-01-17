@@ -1,1 +1,63 @@
-<p>user-detail works!</p>
+<div class="container mt-5 col-12 col-md-10">
+  <!-- Profile Card -->
+  <div class="profile-card">
+    <img
+      src="https://github.com/mdo.png"
+      alt="Profile"
+      class="profile-picture"
+    />
+    <h3 class="mb-1">John Doe</h3>
+    <p class="text-muted">johndoe</p>
+  </div>
+
+  <!-- Personal Information Card -->
+  <div class="info-card">
+    <div class="info-title">Personal Information</div>
+    <div class="info-card-container d-flex flex-wrap justify-content-between">
+      <div class="info-row col-12 col-md-4">
+        <span class="info-label">Name</span>
+        <span>John Doe</span>
+      </div>
+      <div class="info-row col-12 col-md-4">
+        <span class="info-label">Email</span>
+        <span>johndoegmail.com</span>
+      </div>
+      <div class="info-row col-12 col-md-4">
+        <span class="info-label">Phone</span>
+        <span>1-770-736-8031 x56442</span>
+      </div>
+      <div class="info-row col-12 col-md-4">
+        <span class="info-label">Website</span>
+        <span><a href="#">hildegard.org</a></span>
+      </div>
+      <div class="info-row col-12 col-md-4">
+        <span class="info-label">Company</span>
+        <span>Romaguera-Crona</span>
+      </div>
+    </div>
+  </div>
+  <div class="top-posts white-pane mt-3 mb-4">
+    <h5>Posts</h5>
+    <div
+      class="d-flex align-items-center justify-content-between flex-wrap mt-4"
+    >
+      <ng-container *ngIf="posts$ | async as posts; else postsLoader">
+        <div class="flex-column mt-3 col-12 col-md-5" *ngFor="let post of posts">
+          <h6 class="text-secondary">{{ "@" + post.userId }}</h6>
+          <h5 class="text-primary clickable" (click)="goToPostDetail(post.id)">
+            {{ post.title }}
+          </h5>
+          <p class="mt-1 text-black-50">{{ post.body }}</p>
+        </div>
+      </ng-container>
+
+      <ng-template #postsLoader>
+        <div
+          class="loader d-flex align-items-center justify-content-center h-50"
+        >
+          <app-loader *ngIf="postsLoading()"> </app-loader>
+        </div>
+      </ng-template>
+    </div>
+  </div>
+</div>

@@ -68,8 +68,8 @@ export class AlbumComponent {
       }),
       map((albums) => albums.filter((album) => album.title.includes(this.searchControl.value || ''))),
       map((albums) => {
-        const sortQueryParam = this.sortQueryParam
-        if (sortQueryParam?.length) {
+        const sortQueryParam = this.sortQueryParam || ''
+        if (sortQueryParam.length) {
           return albums.sort((a, b) => {
             if (sortQueryParam === '-id') {
               return a.id - b.id

@@ -63,8 +63,8 @@ export class PhotosComponent {
       }),
       map((photos) => photos.filter((photo) => photo.title.includes(this.searchControl.value || ''))),
       map((photos) => {
-        const sortQueryParam = this.sortQueryParam
-        if (sortQueryParam?.length) {
+        const sortQueryParam = this.sortQueryParam || '';
+        if (sortQueryParam.length) {
           return photos.sort((a, b) => {
             if (sortQueryParam === '-id') {
               return a.id - b.id

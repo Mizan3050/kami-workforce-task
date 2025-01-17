@@ -63,8 +63,8 @@ export class PostsComponent implements OnInit {
       }),
       map((posts) => posts.filter((post) => post.title.includes(this.searchControl.value || ''))),
       map((posts) => {
-        const sortQueryParam = this.sortQueryParam
-        if (sortQueryParam?.length) {
+        const sortQueryParam = this.sortQueryParam || ''
+        if (sortQueryParam.length) {
           return posts.sort((a, b) => {
             if (sortQueryParam === '-id') {
               return a.id - b.id
