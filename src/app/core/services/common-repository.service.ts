@@ -11,20 +11,19 @@ import { CommonApiService } from './common-api.service';
 })
 export class CommonRepositoryService {
 
-  #commonApiService = inject(CommonApiService)
-  #cachedPhotos = new Set<Photo>();
-  #cachedAlbums = new Set<Album>();
-  #cachedPosts = new Set<Post>();
-  #cachedPhotosWithId = new Map<string, Photo>();
-  #cachedPostsWithId = new Map<string, Post>();
-
+  commonApiService = inject(CommonApiService)
+  cachedPhotos = new Set<Photo>();
+  cachedAlbums = new Set<Album>();
+  cachedPosts = new Set<Post>();
+  cachedPhotosWithId = new Map<string, Photo>();
+  cachedPostsWithId = new Map<string, Post>();
   getPhotos(params: ListParams) {
-    if (this.#cachedPhotos.size) {
-      return of(Array.from(this.#cachedPhotos))
+    if (this.cachedPhotos.size) {
+      return of(Array.from(this.cachedPhotos))
     } else {
-      return this.#commonApiService.getPhotos(params).pipe(
+      return this.commonApiService.getPhotos(params).pipe(
         tap((photos) => {
-          this.#cachedPhotos = new Set(photos);
+          this.cachedPhotos = new Set(photos);
         }),
         catchError(() => {
           return of([])
@@ -34,12 +33,12 @@ export class CommonRepositoryService {
   }
 
   getPosts(params: ListParams) {
-    if (this.#cachedPosts.size) {
-      return of(Array.from(this.#cachedPosts))
+    if (this.cachedPosts.size) {
+      return of(Array.from(this.cachedPosts))
     } else {
-      return this.#commonApiService.getPosts(params).pipe(
+      return this.commonApiService.getPosts(params).pipe(
         tap((posts) => {
-          this.#cachedPosts = new Set(posts);
+          this.cachedPosts = new Set(posts);
         }),
         catchError(() => {
           return of([])
@@ -49,22 +48,22 @@ export class CommonRepositoryService {
   }
 
   postsRefresh() {
-    this.#cachedPosts.clear();
+    this.cachedPosts.clear();
   }
   albumsRefresh() {
-    this.#cachedAlbums.clear();
+    this.cachedAlbums.clear();
   }
   photosRefresh() {
-    this.#cachedPhotos.clear();
+    this.cachedPhotos.clear();
   }
 
   getAlbums(params: ListParams) {
-    if (this.#cachedAlbums.size) {
-      return of(Array.from(this.#cachedAlbums))
+    if (this.cachedAlbums.size) {
+      return of(Array.from(this.cachedAlbums))
     } else {
-      return this.#commonApiService.getAlbums(params).pipe(
+      return this.commonApiService.getAlbums(params).pipe(
         tap((albums) => {
-          this.#cachedAlbums = new Set(albums);
+          this.cachedAlbums = new Set(albums);
         }),
         catchError(() => {
           return of([])
@@ -74,11 +73,11 @@ export class CommonRepositoryService {
   }
 
   getPhotoDetail(id: string): Observable<Photo | null> {
-    if (this.#cachedPhotosWithId.get(id)?.id) {
-      return of(this.#cachedPhotosWithId.get(id)) as Observable<Photo>
+    if (this.cachedPhotosWithId.get(id)?.id) {
+      return of(this.cachedPhotosWithId.get(id)) as Observable<Photo>
     } else {
-      return this.#commonApiService.getPhotoDetail(id).pipe(
-        tap((photoDetail) => this.#cachedPhotosWithId.set(id, photoDetail)),
+      return this.commonApiService.getPhotoDetail(id).pipe(
+        tap((photoDetail) => this.cachedPhotosWithId.set(id, photoDetail)),
         catchError(() => {
           return of(null)
         })
@@ -87,11 +86,11 @@ export class CommonRepositoryService {
   }
 
   getPostDetail(id: string) {
-    if (this.#cachedPostsWithId.get(id)?.id) {
-      return of(this.#cachedPostsWithId.get(id)) as Observable<Post>
+    if (this.cachedPostsWithId.get(id)?.id) {
+      return of(this.cachedPostsWithId.get(id)) as Observable<Post>
     } else {
-      return this.#commonApiService.getPostDetail(id).pipe(
-        tap((postDetail) => this.#cachedPostsWithId.set(id, postDetail)),
+      return this.commonApiService.getPostDetail(id).pipe(
+        tap((postDetail) => this.cachedPostsWithId.set(id, postDetail)),
         catchError(() => {
           return of(null)
         })
