@@ -6,7 +6,7 @@
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
-.albums-list-container .card {
+.photos-list-container .card {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -18,7 +18,7 @@
 .card-body img {
   border-radius: 2px;
 }
-.albums-list-container {
+.photos-list-container {
   padding: 20px 30px;
   overflow: auto;
   height: 100vh;
@@ -26,4 +26,12 @@
 
 .loader {
   width: 100%;
+}
+
+
+@media (max-width: 768px) {
+  .photos-list-container .card {
+    width: 15rem;
+    font-size: 0.9rem;
+  }
 }

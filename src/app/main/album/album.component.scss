@@ -25,3 +25,16 @@
 .loader {
   width: 100%;
 }
+
+.images{
+  img{
+    border-radius: 2px;
+  }
+}
+
+@media (max-width: 768px) {
+  .albums-list-container .card {
+    width: 15rem;
+    font-size: 0.9rem;
+  }
+}

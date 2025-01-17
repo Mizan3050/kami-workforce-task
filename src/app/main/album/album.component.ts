@@ -40,6 +40,12 @@ export class AlbumComponent {
 
   searchControl = new FormControl(this.searchQueryParam);
 
+  images = [
+    'https://placehold.co/50x50/d8248a/FFFFFF/png',
+    'https://placehold.co/50x50/a929a2/FFFFFF/png',
+    'https://placehold.co/50x50/db537c/FFFFFF/png'
+  ]
+
   ngOnInit(): void {
     this.getAlbums();
     this.searchControl.valueChanges.pipe(
