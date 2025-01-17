@@ -1,7 +1,7 @@
 import { AsyncPipe, NgFor, NgIf } from '@angular/common';
 import { Component, DestroyRef, OnInit, WritableSignal, inject, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { Observable, tap } from 'rxjs';
 import { CommonRepositoryService } from '../../core/services/common-repository.service';
 import { ListParams } from '../../core/models/list-params.model';
@@ -10,7 +10,7 @@ import { Photo } from '../photos/interface/photos.interface';
 
 @Component({
   selector: 'app-dashboard',
-  imports: [AsyncPipe, NgIf, NgFor, LoaderComponent],
+  imports: [AsyncPipe, NgIf, NgFor, LoaderComponent, RouterLink],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss'
 })
@@ -30,17 +30,20 @@ export class DashboardComponent implements OnInit {
     {
       title: 'POSTS',
       count: this.postsCount,
-      class: 'fas fa-comment-alt text-primary'
+      class: 'fas fa-comment-alt text-primary',
+      path: '/posts'
     },
     {
       title: 'ALBUMS',
       count: this.albumsCount,
-      class: 'fas fa-images text-success'
+      class: 'fas fa-images text-success',
+      path: '/albums'
     },
     {
       title: 'PHOTOS',
       count: this.photosCount,
-      class: 'fas fa-camera text-warning'
+      class: 'fas fa-camera text-warning',
+      path: '/photos'
     }
   ]
 

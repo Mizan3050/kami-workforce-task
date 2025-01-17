@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, signal } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
 @Injectable({
@@ -22,7 +22,7 @@ export class RouteQueryParamsService {
       queryParamsHandling: 'merge', // Merge with existing query params
     });
   }
-  
+
   clearQueryParams() {
     this.router.navigate([], {
       relativeTo: this.activatedRoute

@@ -5,7 +5,8 @@ export const routes: Routes = [
     {
         path: 'dashboard',
         loadChildren: () => import("./main/dashboard/dashboard.routes").then(m => m.routes),
-        title: 'Dashboard'
+        title: 'Dashboard',
+        data: { showNav: false }
     },
     {
         path: 'posts',

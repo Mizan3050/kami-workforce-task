@@ -17,13 +17,7 @@
       <option value="id" [selected]="sortQueryParam === 'id'">Asc ID</option>
       <option value="-id" [selected]="sortQueryParam === '-id'">Desc ID</option>
     </select>
-    <button
-      type="button"
-      class="btn btn-outline-secondary"
-      (click)="clearFilters()"
-    >
-      Clear
-    </button>
+
   </div>
   <div class="d-flex align-items-center justify-content-between flex-wrap mt-4">
     <ng-container *ngIf="albums$ | async as albums; else albumsLoader">

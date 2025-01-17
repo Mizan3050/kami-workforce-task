@@ -1,5 +1,10 @@
 <div class="d-flex overflow-x-hidden main-parent">
   <dashboard-sidebar class="d-none d-md-block"></dashboard-sidebar>
-  <dashboard-sidebar-mobile class="d-md-none d-sm-block"></dashboard-sidebar-mobile>
-  <router-outlet></router-outlet>
+  <dashboard-sidebar-mobile
+    class="d-md-none d-sm-block"
+  ></dashboard-sidebar-mobile>
+  <div class="flex-column">
+    <app-header></app-header>
+    <router-outlet></router-outlet>
+  </div>
 </div>

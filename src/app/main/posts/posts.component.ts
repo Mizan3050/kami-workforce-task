@@ -9,6 +9,7 @@ import { LoaderComponent } from "../../shared/components/loader/loader.component
 import { Post } from './interface/post.interface';
 import { PaginatorComponent } from "../../shared/components/paginator/paginator.component";
 import { RouteQueryParamsService } from '../../core/services/route-query-params.service';
+import { HeaderComponent } from '../../core/components/header/header.component';
 
 @Component({
   selector: 'app-posts',
