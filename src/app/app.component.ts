@@ -9,8 +9,7 @@ import { NgIf } from '@angular/common';
   imports: [
     RouterOutlet,
     DashboardSidebarComponent,
-    DashboardSidebarMobileComponent,
-    NgIf
+    DashboardSidebarMobileComponent
 ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'

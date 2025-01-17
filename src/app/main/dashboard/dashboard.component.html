@@ -6,14 +6,16 @@
         class="analytics white-pane mb-4 d-flex align-items-center justify-content-center"
       >
         <div class="container">
-          <div class="row text-center">
+          <div class="row text-center d-flex justify-content-center">
             <ng-container *ngIf="!postsLoading(); else postsLoader">
-              <div class="col-md-4" *ngFor="let widget of summary_widgets">
-                <div class="info-box">
+              <div
+                class="col-4 d-flex justify-content-center align-items-center"
+                *ngFor="let widget of summary_widgets"
+              >
+                <div class="info-box d-flex align-items-center">
                   <i [class]="widget.class"></i>
-                  <div>
-                    <small class="text-muted">{{ widget.title }}</small>
-                    <br />
+                  <div class="ml-2">
+                    <small class="text-muted d-none d-md-flex">{{ widget.title }}</small>
                     <span>{{ widget.count() }}</span>
                   </div>
                 </div>
@@ -25,6 +27,7 @@
           </div>
         </div>
       </div>
+
       <div class="photos white-pane">
         <div class="d-flex align-items-center justify-content-start mb-3">
           <span>Recent Photos:</span>
@@ -32,7 +35,7 @@
         </div>
         <ng-container *ngIf="photos$ | async as photos; else photosLoader">
           <div
-            class="photo-list d-flex flex-wrap justify-content-between clickable"
+            class="photo-list d-flex flex-wrap justify-content-center clickable"
           >
             <div
               class="album-card mb-3"
