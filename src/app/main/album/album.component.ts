@@ -8,6 +8,7 @@ import { CommonRepositoryService } from '../../core/services/common-repository.s
 import { LoaderComponent } from "../../shared/components/loader/loader.component";
 import { PaginatorComponent } from "../../shared/components/paginator/paginator.component";
 import { Album } from './interface/album.interface';
+import { RouteQueryParamsService } from '../../core/services/route-query-params.service';
 
 @Component({
   selector: 'app-album',
@@ -17,6 +18,7 @@ import { Album } from './interface/album.interface';
 })
 export class AlbumComponent {
   #commonRepositoryService = inject(CommonRepositoryService);
+  #routeQueryParamsService = inject(RouteQueryParamsService)
   #route = inject(ActivatedRoute);
 
   searchQueryParam = this.#route.snapshot.queryParamMap.get('search') || '';
@@ -52,7 +54,7 @@ export class AlbumComponent {
       distinctUntilChanged(),
       debounceTime(1100),
       tap((v) => {
-        this.#commonRepositoryService.setQueryParam({ search: v })
+        this.#routeQueryParamsService.setQueryParam({ search: v })
         this.getAlbums()
       })
     ).subscribe()
@@ -87,17 +89,17 @@ export class AlbumComponent {
   sortChange(e: HTMLSelectElement) {
     if (e.value === 'id' || e.value === '-id') {
       this.sortQueryParam = e.value
-      this.#commonRepositoryService.setQueryParam({ sort: e.value })
+      this.#routeQueryParamsService.setQueryParam({ sort: e.value })
     } else {
       this.sortQueryParam = ''
-      this.#commonRepositoryService.setQueryParam({ sort: '' })
+      this.#routeQueryParamsService.setQueryParam({ sort: '' })
     }
     this.getAlbums()
   }
 
   nextPage() {
     this.#paginator._start = this.#paginator._start + this.#paginator._limit;
-    this.#commonRepositoryService.setQueryParam(this.#paginator)
+    this.#routeQueryParamsService.setQueryParam(this.#paginator)
     this.#commonRepositoryService.albumsRefresh();
     this.getAlbums()
   }
@@ -105,7 +107,7 @@ export class AlbumComponent {
   previousPage() {
     if (this.#paginator._start - this.#paginator._limit >= 0) {
       this.#paginator._start = this.#paginator._start - this.#paginator._limit;
-      this.#commonRepositoryService.setQueryParam(this.#paginator)
+      this.#routeQueryParamsService.setQueryParam(this.#paginator)
       this.#commonRepositoryService.albumsRefresh();
       this.getAlbums()
     }
@@ -118,7 +120,7 @@ export class AlbumComponent {
     }
     this.searchControl.patchValue('', { emitEvent: false })
     this.sortQueryParam = '';
-    this.#commonRepositoryService.clearQueryParams();
+    this.#routeQueryParamsService.clearQueryParams();
     this.#commonRepositoryService.albumsRefresh();
     this.getAlbums()
   }

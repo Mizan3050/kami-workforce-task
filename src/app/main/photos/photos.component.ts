@@ -8,6 +8,7 @@ import { Observable, distinctUntilChanged, debounceTime, tap, map } from 'rxjs';
 import { ListParams } from '../../core/models/list-params.model';
 import { CommonRepositoryService } from '../../core/services/common-repository.service';
 import { Photo } from './interface/photos.interface';
+import { RouteQueryParamsService } from '../../core/services/route-query-params.service';
 
 @Component({
   selector: 'app-photos',
@@ -19,7 +20,8 @@ export class PhotosComponent {
 
   #commonRepositoryService = inject(CommonRepositoryService);
   #route = inject(ActivatedRoute);
-
+  #routeQueryParamsService = inject(RouteQueryParamsService)
+  
   searchQueryParam = this.#route.snapshot.queryParamMap.get('search') || '';
   sortQueryParam = this.#route.snapshot.queryParamMap.get('sort') || '';
   startQueryParam = this.#route.snapshot.queryParamMap.get('_start') || 0;
@@ -47,7 +49,7 @@ export class PhotosComponent {
       distinctUntilChanged(),
       debounceTime(1100),
       tap((v) => {
-        this.#commonRepositoryService.setQueryParam({ search: v })
+        this.#routeQueryParamsService.setQueryParam({ search: v })
         this.getPhotos()
       })
     ).subscribe()
@@ -82,17 +84,17 @@ export class PhotosComponent {
   sortChange(e: HTMLSelectElement) {
     if (e.value === 'id' || e.value === '-id') {
       this.sortQueryParam = e.value
-      this.#commonRepositoryService.setQueryParam({ sort: e.value })
+      this.#routeQueryParamsService.setQueryParam({ sort: e.value })
     } else {
       this.sortQueryParam = ''
-      this.#commonRepositoryService.setQueryParam({ sort: '' })
+      this.#routeQueryParamsService.setQueryParam({ sort: '' })
     }
     this.getPhotos()
   }
 
   nextPage() {
     this.#paginator._start = this.#paginator._start + this.#paginator._limit;
-    this.#commonRepositoryService.setQueryParam(this.#paginator)
+    this.#routeQueryParamsService.setQueryParam(this.#paginator)
     this.#commonRepositoryService.postsRefresh();
     this.getPhotos()
   }
@@ -100,7 +102,7 @@ export class PhotosComponent {
   previousPage() {
     if (this.#paginator._start - this.#paginator._limit >= 0) {
       this.#paginator._start = this.#paginator._start - this.#paginator._limit;
-      this.#commonRepositoryService.setQueryParam(this.#paginator)
+      this.#routeQueryParamsService.setQueryParam(this.#paginator)
       this.#commonRepositoryService.postsRefresh();
       this.getPhotos()
     }
@@ -113,7 +115,7 @@ export class PhotosComponent {
     }
     this.searchControl.patchValue('', { emitEvent: false })
     this.sortQueryParam = '';
-    this.#commonRepositoryService.clearQueryParams();
+    this.#routeQueryParamsService.setQueryParam(this.#paginator)
     this.#commonRepositoryService.postsRefresh();
     this.getPhotos()
   }

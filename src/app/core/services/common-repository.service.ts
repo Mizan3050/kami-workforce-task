@@ -18,9 +18,7 @@ export class CommonRepositoryService {
   #cachedPosts = new Set<Post>();
   #cachedPhotosWithId = new Map<string, Photo>();
   #cachedPostsWithId = new Map<string, Post>();
-
-  constructor(private router: Router, private activatedRoute: ActivatedRoute) { }
-
+  
   getPhotos(params: ListParams) {
     if (this.#cachedPhotos.size) {
       return of(Array.from(this.#cachedPhotos))
@@ -85,25 +83,5 @@ export class CommonRepositoryService {
         tap((postDetail) => this.#cachedPostsWithId.set(id, postDetail))
       )
     }
-  }
-
-  setQueryParam(params: any): void {
-    // Retrieve existing query parameters
-    const queryParams = this.activatedRoute.snapshot.queryParams;
-
-    // Add or update a query parameter (e.g., 'filter')
-    const updatedQueryParams = { ...queryParams, ...params };
-
-    // Navigate with the updated query parameters
-    this.router.navigate([], {
-      relativeTo: this.activatedRoute, // Keep the current route
-      queryParams: updatedQueryParams,
-      queryParamsHandling: 'merge', // Merge with existing query params
-    });
-  }
-  clearQueryParams() {
-    this.router.navigate([], {
-      relativeTo: this.activatedRoute
-    });
   }
 }

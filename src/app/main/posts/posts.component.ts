@@ -8,6 +8,7 @@ import { ListParams } from '../../core/models/list-params.model';
 import { LoaderComponent } from "../../shared/components/loader/loader.component";
 import { Post } from './interface/post.interface';
 import { PaginatorComponent } from "../../shared/components/paginator/paginator.component";
+import { RouteQueryParamsService } from '../../core/services/route-query-params.service';
 
 @Component({
   selector: 'app-posts',
@@ -18,6 +19,7 @@ import { PaginatorComponent } from "../../shared/components/paginator/paginator.
 export class PostsComponent implements OnInit {
 
   #commonRepositoryService = inject(CommonRepositoryService);
+  #routeQueryParamsService = inject(RouteQueryParamsService)
   #route = inject(ActivatedRoute);
 
   searchQueryParam = this.#route.snapshot.queryParamMap.get('search') || '';
@@ -47,7 +49,7 @@ export class PostsComponent implements OnInit {
       distinctUntilChanged(),
       debounceTime(1100),
       tap((v) => {
-        this.#commonRepositoryService.setQueryParam({ search: v })
+        this.#routeQueryParamsService.setQueryParam({ search: v })
         this.getPosts()
       })
     ).subscribe()
@@ -82,17 +84,17 @@ export class PostsComponent implements OnInit {
   sortChange(e: HTMLSelectElement) {
     if (e.value === 'id' || e.value === '-id') {
       this.sortQueryParam = e.value
-      this.#commonRepositoryService.setQueryParam({ sort: e.value })
+      this.#routeQueryParamsService.setQueryParam({ sort: e.value })
     } else {
       this.sortQueryParam = ''
-      this.#commonRepositoryService.setQueryParam({ sort: '' })
+      this.#routeQueryParamsService.setQueryParam({ sort: '' })
     }
     this.getPosts()
   }
 
   nextPage() {
     this.#paginator._start = this.#paginator._start + this.#paginator._limit;
-    this.#commonRepositoryService.setQueryParam(this.#paginator)
+    this.#routeQueryParamsService.setQueryParam(this.#paginator)
     this.#commonRepositoryService.postsRefresh();
     this.getPosts()
   }
@@ -100,7 +102,7 @@ export class PostsComponent implements OnInit {
   previousPage() {
     if (this.#paginator._start - this.#paginator._limit >= 0) {
       this.#paginator._start = this.#paginator._start - this.#paginator._limit;
-      this.#commonRepositoryService.setQueryParam(this.#paginator)
+      this.#routeQueryParamsService.setQueryParam(this.#paginator)
       this.#commonRepositoryService.postsRefresh();
       this.getPosts()
     }
@@ -113,7 +115,7 @@ export class PostsComponent implements OnInit {
     }
     this.searchControl.patchValue('', { emitEvent: false })
     this.sortQueryParam = '';
-    this.#commonRepositoryService.clearQueryParams();
+    this.#routeQueryParamsService.setQueryParam(this.#paginator)
     this.#commonRepositoryService.postsRefresh();
     this.getPosts()
   }
